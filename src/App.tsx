@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 
 function App() {
@@ -15,6 +15,14 @@ function App() {
       setMessage("Ação concluída com sucesso!");
     }, 2000);
   }
+
+  // Esconde a mensagem após 3 segundos
+  useEffect(() => {
+    if (message) {
+      const timer = setTimeout(() => setMessage(""), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [message]);
 
   return (
     <div>
